@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  shl-agent:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+      - LLM_PROVIDER=openai
+      # Inject actual API keys securely using a .env file or build secrets
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
